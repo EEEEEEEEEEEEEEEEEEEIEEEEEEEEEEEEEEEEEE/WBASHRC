@@ -27,7 +27,6 @@ pwgen() { cat /dev/urandom|tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?='|fold -w 36| 
 #---------------------------------
 export MENUCONFIG_COLOR="blackbg"
 
-
 # Kernel stuff
 #---------------------------------
 # Update/Upgrade kernel easy as
@@ -35,7 +34,7 @@ export MENUCONFIG_COLOR="blackbg"
 # with our new kernel image.
 #---------------------------------
 kernel() {
-cat /proc/mounts |grep -wioq boot
+cat /proc/mounts|grep -wioq boot
 if [[ "$?" -eq "0" ]]; then 
 	cd /usr/src/linux
 	make menuconfig
@@ -53,10 +52,26 @@ else
 fi
 }
 
+# Disk Space
+# -----------------------------------
+# Print how much usage you have
+# used of your current root partition
+# in GB; example: 
+# Currently used 16GB of 430GB
+# -----------------------------------
+dff() {
+USED=$(df -klP -t xfs -t ext2 -t ext3 -t ext4 -t reiserfs|grep -oE ' [0-9]{1,}( +[0-9]{1,})+' |awk '{sum_used += $2} END {printf "%.0fGB\n", sum_used/1024/1024}')
+TOTAL="$(df -h|grep -w /|awk '{print $4}'|sed 's/$/B/g')"
+echo "Currently used $USED of $TOTAL"
+}
+
 # Aliases
 # ----------------------------------------
 # Just some aliases to make my life easier
 # ----------------------------------------
 alias make="make -j8 -l9"
 alias myip="curl -s https://nr1.nu/i/"
+alias activity="watch -n 1 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head'"
+alias lstoday="ls -al --time-style=+%D| grep `date +%D`"
+#
 
