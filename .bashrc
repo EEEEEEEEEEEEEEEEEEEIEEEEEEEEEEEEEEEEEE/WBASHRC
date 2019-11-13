@@ -5,6 +5,11 @@
 # to create a repo for this so I have a backup
 # since I lost my old one, AGAIN!  ;(
 # --------------------------------------------
+# If you love one-liners, then you can find 
+# my personal and unique oneliners at: 
+# https://www.commandlinefu.com/commands/by/wuziduzi
+# for more cool one liners I have shared
+# --------------------------------------------
 
 # Portage
 # -------
@@ -69,9 +74,24 @@ echo "Currently used $USED of $TOTAL"
 # ----------------------------------------
 # Just some aliases to make my life easier
 # ----------------------------------------
-alias make="make -j8 -l9"
-alias myip="curl -s https://nr1.nu/i/"
-alias activity="watch -n 1 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head'"
-alias lstoday="ls -al --time-style=+%D| grep `date +%D`"
-#
 
+# We want to use all cores by default
+alias make="make -j8 -l9"
+
+# Check WAN IP
+alias myip="curl -s https://nr1.nu/i/"
+
+# Real time acitivity manager, showing top 10 most hardware used tools
+alias activity="watch -n 1 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head'"
+
+# List files that was created today only
+alias lstoday="ls -al --time-style=+%D| grep `date +%D`"
+
+# List wich ports you got open (good for know wich port to use when create iptables)
+alias openports="lsof -i -nlP|awk '{print $9, $8, $1}'|sed 's/.*://'|sort -u"
+
+# Show current network interface in use
+alias interface="route | grep -m1 ^default | awk '{print $NF}'"
+
+# Show all devices on your network sorted in a nice column output
+alias netdiscover="nmap -sn 192.168.1.0/24 -oG - | awk '$4=="Status:" && $5=="Up" {print $0}'|column -t"
