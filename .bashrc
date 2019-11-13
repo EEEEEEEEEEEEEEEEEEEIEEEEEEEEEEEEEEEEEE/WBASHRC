@@ -95,3 +95,8 @@ alias interface="route | grep -m1 ^default | awk '{print $NF}'"
 
 # Show all devices on your network sorted in a nice column output
 alias netdiscover="nmap -sn 192.168.1.0/24 -oG - | awk '$4=="Status:" && $5=="Up" {print $0}'|column -t"
+
+# Find all extensions in recursive from current folder, they will be sorted like jpg, pl, sh
+alias extensions="find . -type f | perl -ne 'print $1 if m/\.([^.\/]+)$/' | sort -u"
+
+
