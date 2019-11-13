@@ -4,6 +4,9 @@ export NUMCPUSPLUSONE=$(( NUMCPUS + 1 ))
 export MAKEOPTS="-j${NUMCPUSPLUSONE} -l${NUMCPUS}"
 export EMERGE_DEFAULT_OPTS="--jobs=${NUMCPUSPLUSONE} --load-average=${NUMCPUS}"
 
+# Create a good password
+pwgen() { cat /dev/urandom|tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?='|fold -w 36| head -n 4|xargs|sed 's/ //g';}
+
 # Kernel
 #---------------------------------
 # Get a black backgrund instead of 
