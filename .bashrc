@@ -18,6 +18,20 @@ export NUMCPUSPLUSONE=$(( NUMCPUS + 1 ))
 export MAKEOPTS="-j${NUMCPUSPLUSONE} -l${NUMCPUS}"
 export EMERGE_DEFAULT_OPTS="--jobs=${NUMCPUSPLUSONE} --load-average=${NUMCPUS}"
 
+
+# File Editor
+# ----------------------
+# If we copy and pasting
+# from some site that
+# using anything else
+# then vim, we want vim
+# ----------------------
+alias pico="vim"
+alias nano="vim"
+alias vi="vim"
+alias emacs="vim"
+alias sublime-text="vim"
+
 # Password Generator
 # ----------------------
 # Takes 0.01 Seconds ;p
