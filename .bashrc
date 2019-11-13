@@ -19,7 +19,9 @@ export MAKEOPTS="-j${NUMCPUSPLUSONE} -l${NUMCPUS}"
 export EMERGE_DEFAULT_OPTS="--jobs=${NUMCPUSPLUSONE} --load-average=${NUMCPUS}"
 
 
-# File Editor
+
+
+# Text Editor
 # ----------------------
 # If we copy and pasting
 # from some site that
