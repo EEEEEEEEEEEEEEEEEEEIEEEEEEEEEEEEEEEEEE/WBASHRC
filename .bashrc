@@ -1,3 +1,4 @@
+#!/etc/skel/.bashrc
 # Author: wuseman <wuseman@nr1.nu>
 # --------------------------------------------
 # Just my simple bashrc, I am so tired
