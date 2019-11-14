@@ -11,13 +11,32 @@
 # for more cool one liners I have shared
 # --------------------------------------------
 
-# Portage
-# -------
+
+# Portage (make.conf)
+# ---------------------------------------------------------
+# Stuff for make.conf are set here instead of in conf file
+# ---------------------------------------------------------
 export NUMCPUS=$(nproc)
 export NUMCPUSPLUSONE=$(( NUMCPUS + 1 ))
 export MAKEOPTS="-j${NUMCPUSPLUSONE} -l${NUMCPUS}"
 export EMERGE_DEFAULT_OPTS="--jobs=${NUMCPUSPLUSONE} --load-average=${NUMCPUS}"
 
+# Misc stuff for portage
+# ----------------------
+# Upgrade Entire System
+alias upgrade="emerge -avuDN --with-bdeps y --keep-going world"
+
+# Our bash prompt
+# -----------------------------------
+# We want it as simple as possible
+# and not any l33t h4cking shit stuff
+# this is gentoo default but different(magenta) colour
+# -----------------------------------
+if [[ $EUID -eq "root" ]]; then
+  export PS1="\[\033]0;\u@\h:\w\007\]\[\033[01;31m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] "
+else
+  export PS1="\[\033]0;\u@\h:\w\007\]\[\033[01;35m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] "
+fi
 
 
 
@@ -115,4 +134,19 @@ alias netdiscover="nmap -sn 192.168.1.0/24 -oG - | awk '$4=="Status:" && $5=="Up
 # Find all extensions in recursive from current folder, they will be sorted like jpg, pl, sh
 alias extensions="find . -type f | perl -ne 'print $1 if m/\.([^.\/]+)$/' | sort -u"
 
+# List all ip-addresses you are connected with right now
+alias connected="netstat -lantp | grep ESTABLISHED |awk '{print $5}' | awk -F: '{print $1}' | sort -u"
 
+# Qemu Virtual Boxes
+win10() {
+         cd ~/qemu/windows10
+         qemu-system-x86_64 \
+         -enable-kvm \
+         -cpu host \
+         -smp 8 \
+         -net nic \
+         -net user \
+         -device usb-ehci,id=ehci \
+         -accel kvm  
+         -hda windows.10.pro.final.x64.swedish.img
+     }
