@@ -11,6 +11,10 @@
 # for more cool one liners I have shared
 # --------------------------------------------
 
+# General settings
+# ----------------
+USERNAME=""
+PASSWORD=""
 
 # Portage (make.conf)
 # ---------------------------------------------------------
@@ -37,8 +41,6 @@ if [[ $EUID -eq "root" ]]; then
 else
   export PS1="\[\033]0;\u@\h:\w\007\]\[\033[01;35m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] "
 fi
-
-
 
 # Text Editor
 # ----------------------
@@ -144,9 +146,21 @@ win10() {
          -enable-kvm \
          -cpu host \
          -smp 8 \
-         -net nic \
-         -net user \
          -device usb-ehci,id=ehci \
-         -accel kvm  
-         -hda windows.10.pro.final.x64.swedish.img
+         -net nic -net user \
+         -hda win10.img 
      }
+
+# Mount Thinclient to /mnt/thinclient
+alias mountthinclient="sudo mount -t cifs -o username=$USERNAME,password=$PASSWORD //192.168.1.106/localdisk /mnt/thinclient/"
+
+# Rdeskop
+alias thinclient="rdesktop -u $USERNAME -p $PASSWORD -g 1024x768 -c /tmp/ -n thinclient -k sv -C -T thinclient -N -a 24 -r clipboard:CLIPBOARD -r sound:local 192.168.1.106"
+
+# SSH
+alias h="ssh $USERNAME@wuseman.se"
+alias n="ssh $USERNAMEA@nr1.nu"
+alias t="ssh $USERNAME@thinclient"
+
+# Wget
+alias wget="wget --show-progress -q"
