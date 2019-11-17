@@ -1,3 +1,4 @@
+#!/etc/skel/.bashrc
 # Author: wuseman <wuseman@nr1.nu>
 # --------------------------------------------
 # Just my simple bashrc, I am so tired
@@ -63,7 +64,7 @@ pwgen() { cat /dev/urandom|tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?='|fold -w 36| 
 
 # Kernel Theme
 #---------------------------------
-# Get a black backgruond instead of 
+# Get a black background instead of 
 # the default gray/blue setup
 # - Use mono if you want black/white
 #---------------------------------
