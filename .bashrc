@@ -26,6 +26,14 @@ export NUMCPUSPLUSONE=$(( NUMCPUS + 1 ))
 export MAKEOPTS="-j${NUMCPUSPLUSONE} -l${NUMCPUS}"
 export EMERGE_DEFAULT_OPTS="--jobs=${NUMCPUSPLUSONE} --load-average=${NUMCPUS}"
 
+# Locales
+export LANG=en_SE.UTF-8
+export LC_PAPER="en_SE.UTF-8"
+export LC_ADDRESS="en_SE.UTF-8"
+export LC_TELEPHONE="en_SE.UTF-8"
+export LC_MEASUREMENT="en_SE.UTF-8"
+export LC_IDENTIFICATION="en_SE.UTF-8"
+
 # Misc stuff for portage
 # ----------------------
 # Upgrade Entire System
@@ -140,6 +148,10 @@ alias extensions="find . -type f | perl -ne 'print $1 if m/\.([^.\/]+)$/' | sort
 # List all ip-addresses you are connected with right now
 alias connected="netstat -lantp | grep ESTABLISHED |awk '{print $5}' | awk -F: '{print $1}' | sort -u"
 
+# Sort all folders by alphabet
+alias sortalpha="
+for i in *; do I=`echo $i|cut -c 1|tr a-z A-Z`; if [ ! -d "$I" ]; then mkdir "$I"; fi; mv "$i" "$I"/"$i"; done"
+
 # Qemu Virtual Boxes
 win10() {
          cd ~/qemu/windows10
@@ -163,5 +175,5 @@ alias h="ssh $USERNAME@wuseman.se"
 alias n="ssh $USERNAMEA@nr1.nu"
 alias t="ssh $USERNAME@thinclient"
 
-# Wget
-alias wget="wget --show-progress -q"
+# Weechat
+alias weechat="ssh -t $USERNAME@wuseman.se screen -rd weechat"
